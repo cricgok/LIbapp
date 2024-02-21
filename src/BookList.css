@@ -1,0 +1,32 @@
+/* BookList.css */
+
+.book-list-container {
+    margin-top: 20px;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .book-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .book-title {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+  
+  .book-info {
+    margin-bottom: 5px;
+  }
+  
+  .book-info span {
+    font-weight: bold;
+  }
+  
