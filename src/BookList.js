@@ -5,7 +5,7 @@ import Pagination from './Pagination';
 import { Link } from 'react-router-dom';
 import Bookimage from './assesst/booklist.jpg';
 
-function BookList({ onDeleteBook }) {
+function BookList() {
   const [books, setBooks] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -52,6 +52,26 @@ function BookList({ onDeleteBook }) {
     setCurrentPage(page);
   };
 
+  const handleDeleteBook = (id) => {
+    fetch(`http://localhost:5001/books/${id}`, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (response.ok) {
+        // If deletion is successful, remove the deleted book from the state
+        setBooks(prevBooks => prevBooks.filter(book => book.id !== id));
+        fetchBooks();
+      } else {
+        // Handle non-successful response
+        throw new Error('Failed to delete book');
+      }
+    })
+    .catch(error => {
+      console.error('Error deleting book:', error.message);
+      alert('Failed to delete book. Please try again later.');
+    });
+  };
+
   return (
     <div className="book-list-container">
       <img src={Bookimage} alt="BookImage" className='booklist-image'/>
@@ -75,7 +95,7 @@ function BookList({ onDeleteBook }) {
               <td className="book-info">{book.subject}</td>
               <td className="book-info">{book.publish_date}</td>
               <td className="book-info">{book.count}</td>
-              <td><button className='book-delete' onClick={() => onDeleteBook(book.id)}>Delete</button></td>
+              <td><button className='book-delete' onClick={() => handleDeleteBook(book.id)}>Delete</button></td>
             </tr>
           ))}
         </tbody>

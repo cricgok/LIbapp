@@ -50,14 +50,15 @@ function BorrowerForm({ book, onBorrow }) {
         throw new Error('Failed to send email notification');
       }
 
-      // Assuming onBorrow is a function passed from LibraryList to handle borrowing
+      
       onBorrow(book.id, formData);
+      window.location.reload();
 
-      // Clear the form data after successful submission
+      
       handleClear();
     } catch (error) {
       console.error('Error handling form submission:', error);
-      // Handle error, show message to user, etc.
+      
     }
   };
 
