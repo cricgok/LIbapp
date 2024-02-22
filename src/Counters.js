@@ -21,7 +21,7 @@ function Counters({ books }) {
   });
 
   // Calculate total number of books
-  const totalBooks = books.length;
+  const totalBooks = books.reduce((total, book) => total + (book.count || 0), 0);
 
   return (
     <div className="counter-container">

@@ -8,7 +8,8 @@ function User() {
     title: '',
     author: '',
     subject: '',
-    publishDate: ''
+    publishDate: '',
+    count: ''
   });
 
   const handleChange = (e) => {
@@ -36,6 +37,7 @@ function User() {
       alert(data.message); // Assuming server sends back a message
       // Optionally, you can reset the form after successful submission
       event.target.reset();
+      window.location.reload();
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
       alert('Failed to add book');
@@ -71,11 +73,24 @@ function User() {
               required
             />
           </div>
+          <div>
+            <label htmlFor="count">Count:</label>
+            <input
+              type="number"
+              id="count"
+              name="count"
+              value={formData.count}
+              onChange={handleChange}
+              min="0"
+              required
+            />
+          </div>
           <button type="submit">Submit</button>
         </form>
       </div>
       <Link to="/books" className="link-to-books">View Books</Link>
     </div>
+  
   );
 }
 

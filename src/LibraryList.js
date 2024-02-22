@@ -11,6 +11,7 @@ function LibraryList() {
   const [sortBy, setSortBy] = useState('title');
   const [currentPage, setCurrentPage] = useState(1);
   const [booksPerPage] = useState(10);
+  const [totalBooksCount, setTotalBooksCount] = useState(0); // State to store the total count of books
 
   useEffect(() => {
     fetchBooks();
@@ -55,6 +56,17 @@ function LibraryList() {
         setFilteredBooks(data); // Initially set filtered books to all books
       })
       .catch(error => console.error('Error fetching books:', error));
+
+    // Fetch total count of books from the server
+    fetch(`http://localhost:5001/books/count`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch total books count');
+        }
+        return response.json();
+      })
+      .then(data => setTotalBooksCount(data.count))
+      .catch(error => console.error('Error fetching total books count:', error));
   };
 
   const handleClearFilters = () => {
@@ -66,6 +78,42 @@ function LibraryList() {
   const handleSortChange = (event) => {
     setSortBy(event.target.value);
   };
+
+  // Function to handle borrowing a book
+  const handleGetBook = (bookId) => {
+    // Send a request to decrement the count of the selected book
+    fetch(`http://localhost:5001/books/${bookId}/borrow`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ action: 'borrow' }), // Optionally, you can send additional data
+    })
+    .then(response => {
+      if (response.ok) {
+        // If borrowing is successful, update the count of the selected book in the state
+        const updatedBooks = books.map(book => {
+          if (book.id === bookId) {
+            return { ...book, count: book.count - 1 }; // Decrement the count by one
+          }
+          return book;
+        });
+        setBooks(updatedBooks);
+        setFilteredBooks(updatedBooks); // Update the filtered books as well
+        // You may also want to display a success message to the user
+        alert(`Book with ID ${bookId} borrowed successfully!`);
+      } else {
+        // Handle non-successful response (e.g., 404 Not Found)
+        throw new Error('Failed to borrow book');
+      }
+    })
+    .catch(error => {
+      console.error('Error borrowing book:', error.message);
+      // Display an error message to the user
+      alert('Failed to borrow book. Please try again later.');
+    });
+  };
+
 
   // Logic for pagination
   const indexOfLastBook = currentPage * booksPerPage;
@@ -105,12 +153,15 @@ function LibraryList() {
           <option value="subject">Sort by Subject</option>
         </select>
       </div>
+      <p>Total Books: {totalBooksCount}</p> {/* Display total books count */}
       <table className="library-table">
         <thead>
           <tr>
             <th>Title</th>
             <th>Author</th>
             <th>Subject</th>
+            <th>Count</th> {/* New column for displaying book count */}
+            <th>Action</th>
             {/* Add more table headers as needed */}
           </tr>
         </thead>
@@ -120,6 +171,10 @@ function LibraryList() {
               <td>{book.title}</td>
               <td>{book.author}</td>
               <td>{book.subject}</td>
+              <td>{book.count}</td> {/* Display the count of available books */}
+              <td>
+                <button onClick={() => handleGetBook(book.id)} className="get-button">Get</button>
+              </td>
               {/* Add more table cells for additional book properties */}
             </tr>
           ))}

@@ -1,4 +1,3 @@
-// BookList.js
 import React, { useState, useEffect } from 'react';
 import './BookList.css'; 
 import './LibraryPage.css';
@@ -60,6 +59,7 @@ function BookList({ onDeleteBook, currentPage, itemsPerPage, onPageChange }) {
             <th>Author</th>
             <th>Subject</th>
             <th>Publish Date</th>
+            <th>Count</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -70,6 +70,7 @@ function BookList({ onDeleteBook, currentPage, itemsPerPage, onPageChange }) {
               <td className="book-info">{book.author}</td>
               <td className="book-info">{book.subject}</td>
               <td className="book-info">{book.publish_date}</td>
+              <td className="book-info">{book.count}</td>
               <td><button className='book-delete' onClick={() => handleDelete(book.id)}>Delete</button></td>
             </tr>
           ))}
