@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './LibraryList.css'; // Import CSS file for styling
+import Counters from './Counters'; // Import the Counters component
 
 function LibraryList() {
   const [books, setBooks] = useState([]);
@@ -8,6 +9,8 @@ function LibraryList() {
   const [searchAuthor, setSearchAuthor] = useState('');
   const [searchSubject, setSearchSubject] = useState('');
   const [sortBy, setSortBy] = useState('title');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [booksPerPage] = useState(10);
 
   useEffect(() => {
     fetchBooks();
@@ -64,29 +67,39 @@ function LibraryList() {
     setSortBy(event.target.value);
   };
 
+  // Logic for pagination
+  const indexOfLastBook = currentPage * booksPerPage;
+  const indexOfFirstBook = indexOfLastBook - booksPerPage;
+  const currentBooks = filteredBooks.slice(indexOfFirstBook, indexOfLastBook);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   return (
-    <div>
-      <div className="filters">
+    <div className="library-container">
+      <div className="filters-container">
         <input
           type="text"
           placeholder="Search by title..."
           value={searchTitle}
           onChange={event => setSearchTitle(event.target.value)}
+          className="search-input"
         />
         <input
           type="text"
           placeholder="Search by author..."
           value={searchAuthor}
           onChange={event => setSearchAuthor(event.target.value)}
+          className="search-input"
         />
         <input
           type="text"
           placeholder="Search by subject..."
           value={searchSubject}
           onChange={event => setSearchSubject(event.target.value)}
+          className="search-input"
         />
-        <button onClick={handleClearFilters}>Clear</button>
-        <select value={sortBy} onChange={handleSortChange}>
+        <button onClick={handleClearFilters} className="filter-button">Clear</button>
+        <select value={sortBy} onChange={handleSortChange} className="sort-select">
           <option value="title">Sort by Title</option>
           <option value="author">Sort by Author</option>
           <option value="subject">Sort by Subject</option>
@@ -102,7 +115,7 @@ function LibraryList() {
           </tr>
         </thead>
         <tbody>
-          {filteredBooks.map(book => (
+          {currentBooks.map(book => (
             <tr key={book.id}>
               <td>{book.title}</td>
               <td>{book.author}</td>
@@ -112,6 +125,17 @@ function LibraryList() {
           ))}
         </tbody>
       </table>
+      <Counters books={filteredBooks} /> {/* Include the Counters component */}
+      {/* Pagination */}
+      <ul className="pagination">
+        {Array.from({ length: Math.ceil(filteredBooks.length / booksPerPage) }, (_, i) => (
+          <li key={i} className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}>
+            <button onClick={() => paginate(i + 1)} className="page-link">
+              {i + 1}
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

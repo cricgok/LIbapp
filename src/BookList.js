@@ -70,7 +70,7 @@ function BookList({ onDeleteBook, currentPage, itemsPerPage, onPageChange }) {
               <td className="book-info">{book.author}</td>
               <td className="book-info">{book.subject}</td>
               <td className="book-info">{book.publish_date}</td>
-              <td><button onClick={() => handleDelete(book.id)}>Delete</button></td>
+              <td><button className='book-delete' onClick={() => handleDelete(book.id)}>Delete</button></td>
             </tr>
           ))}
         </tbody>

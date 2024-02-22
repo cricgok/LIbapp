@@ -25,25 +25,20 @@ function Counters({ books }) {
 
   return (
     <div className="counter-container">
-      <table className="counters-table">
-        <thead>
-          <tr>
-            <th>BOOKS</th>
-            <th>Authors</th>
-            <th>Subjects</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{totalBooks}</td>
-            <td>{Object.keys(authorCount).length}</td>
-            <td>{Object.keys(subjectCount).length}</td>
-          </tr>
-        </tbody>
-      </table>
-  
-      <div className="counter total-count">
-        <span>Total Books: {totalBooks}</span>
+      <h2>Book Statistics</h2>
+      <div className="counters-wrapper">
+        <div className="counter-box">
+          <h3>Total Books</h3>
+          <div className="counter-value">{totalBooks}</div>
+        </div>
+        <div className="counter-box">
+          <h3>Total Authors</h3>
+          <div className="counter-value">{Object.keys(authorCount).length}</div>
+        </div>
+        <div className="counter-box">
+          <h3>Total Subjects</h3>
+          <div className="counter-value">{Object.keys(subjectCount).length}</div>
+        </div>
       </div>
     </div>
   );

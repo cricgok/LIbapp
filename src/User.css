@@ -1,52 +1,66 @@
-/* User.css */
 
 .user-container {
-    margin-top: 20px;
-  }
-  
-  .form-container {
-    width: 400px;
-    margin: 0 auto;
-  }
-  
-  .form-container h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .form-container label {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  .form-container input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-  }
-  
-  .form-container button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .form-container button:hover {
-    background-color: #0056b3;
-  }
-  
-  .link-to-books {
-    display: block;
-    margin-top: 20px;
-    text-align: center;
-    font-size: 18px;
-    color: #007bff;
-  }
-  
-  .link-to-books:hover {
-    text-decoration: underline;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.form-container {
+  width: 400px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.form-container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container label {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.form-container input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form-container button {
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+  background-color: #0056b3;
+}
+
+.link-to-books {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.link-to-books:hover {
+  color: #0056b3;
+}
