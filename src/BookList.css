@@ -66,3 +66,11 @@
 .book-item:hover {
   box-shadow: 0 2px 4px rgba(167, 54, 54, 0.1);
 }
+.booklist-image{
+  width: 100px;
+  height: 100px;
+  image-orientation: from-image;
+  align-content: center;
+  height: auto;
+  margin-bottom: 20px;
+}

@@ -1,7 +1,11 @@
-// Home.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Home.css'; 
+import './Home.css';
+// import image1 from './assesst/image1.jpg';
+// import image2 from './assesst/image2.jpg';
+import image3 from './assesst/image3.jpg';
+// import image4 from './assesst/image4.jpg';
+
 
 function Home() {
   return (
@@ -13,6 +17,11 @@ function Home() {
       <Link to="/login" className="link">
         <button className="login-button">Login</button>
       </Link>
+      <div className="image-container">
+        <img src={image3} alt="Image 3" className="image" />
+        
+        {/* Add more images as needed */}
+      </div>
     </div>
   );
 }

@@ -5,23 +5,21 @@
   margin: 50px auto;
   padding: 20px;
   text-align: center;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9; /* Light gray background */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
 }
 
 .heading {
-  font-size: 28px;
+  font-size: 36px;
   margin-bottom: 20px;
+  color: #007bff; 
 }
 
 .description {
   font-size: 18px;
   margin-bottom: 15px;
-}
-
-.link {
-  text-decoration: none;
+  color: #333; /* Dark gray color */
 }
 
 .login-button {
@@ -37,4 +35,18 @@
 
 .login-button:hover {
   background-color: #0056b3;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.image {
+  width: 200px; /* Adjust image width */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  margin-top: 20px; /* Add margin to the top */
 }
