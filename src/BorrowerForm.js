@@ -18,7 +18,7 @@ function BorrowerForm({ book, onBorrow }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://8b90-16-170-208-144.ngrok-free.app/borrowers', {
+      const response = await fetch('https://4644-16-170-208-144.ngrok-free.app/borrowers', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ function BorrowerForm({ book, onBorrow }) {
       if (!response.ok) {
         throw new Error('Failed to store borrower data');
       }
-      const emailResponse = await fetch('https://8b90-16-170-208-144.ngrok-free.app/borrowers/send-email', {
+      const emailResponse = await fetch('https://4644-16-170-208-144.ngrok-free.app/borrowers/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
