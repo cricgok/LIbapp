@@ -12,6 +12,7 @@ function BookList() {
 
   useEffect(() => {
     fetchBooks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   const fetchBooks = () => {
@@ -26,7 +27,6 @@ function BookList() {
       })
       .then(data => {
         setBooks(data);
-        // Calculate total pages based on total number of books
         fetchTotalBooksCount();
       })
       .catch(error => console.error('Error fetching books:', error));
