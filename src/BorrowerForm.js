@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './BorrowerForm.css'; // Import CSS file
+import './BorrowerForm.css'; 
 import EmailImage from './assesst/email.jpg';
 
 function BorrowerForm({ book, onBorrow }) {
@@ -18,8 +18,7 @@ function BorrowerForm({ book, onBorrow }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Send a POST request to store the borrower data
-      const response = await fetch('http://localhost:5001/borrowers', {
+      const response = await fetch('https://edd7-16-170-208-144.ngrok-free.app/borrowers', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,9 +32,7 @@ function BorrowerForm({ book, onBorrow }) {
       if (!response.ok) {
         throw new Error('Failed to store borrower data');
       }
-
-      // Send email notification
-      const emailResponse = await fetch('http://localhost:5001/send-email', {
+      const emailResponse = await fetch('https://edd7-16-170-208-144.ngrok-free.app/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,7 +70,7 @@ function BorrowerForm({ book, onBorrow }) {
 
   return (
     <div className="borrower-form-container">
-      <img src={EmailImage} alt="Form Image" className="borrower-form-image" /> {/* Image element */}
+      <img src={EmailImage} alt="Form Image" className="borrower-form-image" /> 
       <h2>Borrow Book: {book.title}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">

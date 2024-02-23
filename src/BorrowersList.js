@@ -12,17 +12,14 @@ function BorrowersList() {
 
   const fetchBorrowers = async () => {
     try {
-      const response = await fetch('http://localhost:5001/borrowers');
+      const response = await fetch('https://edd7-16-170-208-144.ngrok-free.app/borrowers');
       if (!response.ok) {
         throw new Error('Failed to fetch borrowers data');
       }
       const data = await response.json();
-      // Remove duplicate borrowers based on name
       const uniqueBorrowers = Array.from(new Set(data.map(borrower => borrower.name)))
         .map(name => data.find(borrower => borrower.name === name));
       setBorrowers(uniqueBorrowers);
-      
-      // Calculate count of books borrowed by each borrower
       const borrowersWithCount = uniqueBorrowers.map(borrower => ({
         ...borrower,
         booksBorrowed: data.filter(item => item.name === borrower.name).length
@@ -30,7 +27,6 @@ function BorrowersList() {
       setBorrowersCount(borrowersWithCount);
     } catch (error) {
       console.error('Error fetching borrowers:', error);
-      // Handle error, show message to user, etc.
     }
   };
 

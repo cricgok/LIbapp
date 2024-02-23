@@ -19,8 +19,6 @@ function Home() {
       </Link>
       <div className="image-container">
         <img src={image3} alt="Image 3" className="image" />
-        
-        {/* Add more images as needed */}
       </div>
     </div>
   );

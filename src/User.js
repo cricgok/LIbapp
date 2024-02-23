@@ -1,4 +1,4 @@
-// User.js
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './User.css';
@@ -21,7 +21,7 @@ function User() {
     event.preventDefault();
     
     try {
-      const response = await fetch('http://localhost:5001/submit-form', {
+      const response = await fetch('https://edd7-16-170-208-144.ngrok-free.app/submit-form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -34,8 +34,7 @@ function User() {
       }
 
       const data = await response.json();
-      alert(data.message); // Assuming server sends back a message
-      // Optionally, you can reset the form after successful submission
+      alert(data.message); 
       event.target.reset();
       window.location.reload();
     } catch (error) {

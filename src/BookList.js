@@ -17,7 +17,7 @@ function BookList() {
   const fetchBooks = () => {
     const itemsPerPage = 10;
     const startIndex = (currentPage - 1) * itemsPerPage;
-    fetch(`http://localhost:5001/books?_start=${startIndex}&_limit=${itemsPerPage}`)
+    fetch(`https://edd7-16-170-208-144.ngrok-free.app/books?_start=${startIndex}&_limit=${itemsPerPage}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch books');
@@ -33,7 +33,7 @@ function BookList() {
   };
 
   const fetchTotalBooksCount = () => {
-    fetch(`http://localhost:5001/books/count`)
+    fetch(`https://edd7-16-170-208-144.ngrok-free.app/books/count`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch total books count');
@@ -53,16 +53,14 @@ function BookList() {
   };
 
   const handleDeleteBook = (id) => {
-    fetch(`http://localhost:5001/books/${id}`, {
+    fetch(`https://edd7-16-170-208-144.ngrok-free.app/books/${id}`, {
       method: 'DELETE'
     })
     .then(response => {
       if (response.ok) {
-        // If deletion is successful, remove the deleted book from the state
         setBooks(prevBooks => prevBooks.filter(book => book.id !== id));
         fetchBooks();
       } else {
-        // Handle non-successful response
         throw new Error('Failed to delete book');
       }
     })

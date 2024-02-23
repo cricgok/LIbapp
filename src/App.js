@@ -1,4 +1,4 @@
-// App.js
+
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './Home';
@@ -15,9 +15,9 @@ function App() {
       <Route path="/" exact element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/user" element={<UserPage />} />
-      <Route path="/library" element={<Library />}/> {/* Add route for the library page */}
+      <Route path="/library" element={<Library />}/> 
       <Route path="/books" element={<BookListPage />} />
-      <Route path="/library-list" element={<LibraryList />} /> {/* Add route for LibraryList */}
+      <Route path="/library-list" element={<LibraryList />} /> 
       <Route path="/borrowers" element={< BorrowersList/>} />
     </Routes>
   );

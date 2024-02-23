@@ -7,11 +7,9 @@ const nodemailer = require('nodemailer');
 const app = express();
 const port = 5001;
 
-// Middleware setup
 app.use(cors());
 app.use(bodyParser.json());
 
-// MySQL Connection
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -27,7 +25,6 @@ connection.connect((err) => {
   console.log('Connected to MySQL');
 });
 
-// Route to handle form submission to add a new book
 app.post('/submit-form', (req, res) => {
   const { title, author, subject, publishDate, count } = req.body;
   const query = `INSERT INTO books (title, author, subject, publish_date, count) VALUES (?, ?, ?, ?, ?)`;
@@ -43,7 +40,6 @@ app.post('/submit-form', (req, res) => {
   });
 });
 
-// Route to fetch books with optional search filters and pagination
 app.get('/books', (req, res) => {
   const { search = '', page = 1, pageSize = 10 } = req.query;
   const offset = (page - 1) * pageSize;
@@ -62,7 +58,6 @@ app.get('/books', (req, res) => {
   });
 });
 
-// Route to delete a book by ID
 app.delete('/books/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const query = `DELETE FROM books WHERE id = ?`;
@@ -82,7 +77,6 @@ app.delete('/books/:id', (req, res) => {
   });
 });
 
-// Route to fetch the total count of books
 app.get('/books/count', (req, res) => {
   connection.query('SELECT COUNT(*) AS totalBooks FROM books', (err, results) => {
     if (err) {
@@ -99,11 +93,9 @@ app.get('/books/count', (req, res) => {
 app.post('/borrowers', (req, res) => {
   const { bookId, borrowerData } = req.body;
 
-  // SQL query to insert borrower data into the database
   const query = 'INSERT INTO borrowers (book_id, name, email, phone_number, address) VALUES (?, ?, ?, ?, ?)';
   const values = [bookId, borrowerData.name, borrowerData.email, borrowerData.phoneNumber, borrowerData.address];
 
-  // Execute the query
   connection.query(query, values, (error, results) => {
     if (error) {
       console.error('Error inserting borrower data:', error);
@@ -115,12 +107,10 @@ app.post('/borrowers', (req, res) => {
 });
 
 
-// Route to handle borrowing a book
 app.post('/books/:id/borrow', async (req, res) => {
   const bookId = req.params.id;
   const { email, title } = req.body;
 
-  // Update the count of the book in the database
   connection.query('UPDATE books SET count = count - 1 WHERE id = ?', [bookId], async (err, results) => {
     if (err) {
       console.error('Error executing MySQL query:', err);
@@ -133,7 +123,6 @@ app.post('/books/:id/borrow', async (req, res) => {
       return;
     }
 
-    // Send email notification
     try {
       await sendEmail(email, title);
       res.status(200).json({ message: 'Book borrowed successfully and email sent' });
@@ -144,7 +133,6 @@ app.post('/books/:id/borrow', async (req, res) => {
   });
 });
 
-// Route to fetch the borrowers list
 app.get('/borrowers', (req, res) => {
   const query = 'SELECT DISTINCT name, phone_number AS phoneNumber, email, address FROM borrowers';
 
@@ -159,12 +147,9 @@ app.get('/borrowers', (req, res) => {
   });
 });
 
-
-// Route to handle sending emails
 app.post('/send-email', (req, res) => {
   const { email, bookTitle } = req.body;
 
-  // Send email notification
   sendEmail(email, bookTitle)
     .then(() => {
       res.status(200).json({ message: 'Email sent successfully' });
@@ -176,22 +161,18 @@ app.post('/send-email', (req, res) => {
 });
 
 
-
-// Function to send email
 const sendEmail = async (toEmail, bookTitle) => {
-  // Create a transporter
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'gokulramesh033@gmail.com', // Enter your Gmail email address
-      pass: 'nzig mhrd mtvw vmrn' // Enter your Gmail password
+      user: 'gokulramesh033@gmail.com', 
+      pass: 'nzig mhrd mtvw vmrn' 
     }
   });
 
   try {
-    // Send mail with defined transport object
     let info = await transporter.sendMail({
-      from: 'gokulramesh@gmail.com', // Enter your Gmail email address
+      from: 'gokulramesh@gmail.com', 
       to: toEmail,
       subject: 'Book Borrowed Notification',
       text: `You have borrowed the book: ${bookTitle}. Enjoy reading!`

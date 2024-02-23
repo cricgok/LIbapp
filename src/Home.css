@@ -1,13 +1,12 @@
-/* Home.css */
 
 .container {
   max-width: 600px;
   margin: 50px auto;
   padding: 20px;
   text-align: center;
-  background-color: #f9f9f9; /* Light gray background */
+  background-color: #f9f9f9; 
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .heading {
@@ -19,7 +18,7 @@
 .description {
   font-size: 18px;
   margin-bottom: 15px;
-  color: #333; /* Dark gray color */
+  color: #333;
 }
 
 .login-button {
@@ -44,9 +43,9 @@
 }
 
 .image {
-  width: 200px; /* Adjust image width */
-  height: auto; /* Maintain aspect ratio */
+  width: 200px; 
+  height: auto; 
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
-  margin-top: 20px; /* Add margin to the top */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 20px; 
 }

@@ -45,7 +45,7 @@ function LibraryList() {
   }, [books, searchTitle, searchAuthor, searchSubject, sortBy]);
 
   const fetchBooks = () => {
-    fetch(`http://localhost:5001/books`)
+    fetch(`https://edd7-16-170-208-144.ngrok-free.app/books`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch books');
@@ -58,7 +58,7 @@ function LibraryList() {
       })
       .catch(error => console.error('Error fetching books:', error));
 
-    fetch(`http://localhost:5001/books/count`)
+    fetch(`https://edd7-16-170-208-144.ngrok-free.app/books/count`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch total books count');
@@ -90,7 +90,7 @@ function LibraryList() {
   };
 
   const handleBorrow = (bookId, borrowerData) => {
-    fetch(`http://localhost:5001/books/${bookId}/borrow`, {
+    fetch(`https://edd7-16-170-208-144.ngrok-free.app/books/${bookId}/borrow`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

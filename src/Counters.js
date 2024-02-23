@@ -2,25 +2,18 @@ import React from 'react';
 import './counters.css';
 
 function Counters({ books }) {
-  // Initialize counters
   let authorCount = {};
   let subjectCount = {};
-
-  // Check if books array is defined
   if (!Array.isArray(books)) {
-    return null; // Return null or handle the case where books is not defined
+    return null; 
   }
 
-  // Count occurrences of each author and subject
   books.forEach(book => {
-    // Count authors
     authorCount[book.author] = (authorCount[book.author] || 0) + 1;
 
-    // Count subjects
     subjectCount[book.subject] = (subjectCount[book.subject] || 0) + 1;
   });
 
-  // Calculate total number of books
   const totalBooks = books.reduce((total, book) => total + (book.count || 0), 0);
 
   return (
