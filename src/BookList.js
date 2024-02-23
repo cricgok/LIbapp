@@ -18,7 +18,11 @@ function BookList() {
   const fetchBooks = () => {
     const itemsPerPage = 10;
     const startIndex = (currentPage - 1) * itemsPerPage;
-    fetch(`https://01a2-16-170-208-144.ngrok-free.app/books?_start=${startIndex}&_limit=${itemsPerPage}`)
+    fetch(`https://8b90-16-170-208-144.ngrok-free.app/books?_start=${startIndex}&_limit=${itemsPerPage}`,{
+      headers:{
+        'ngrok-skip-browser-warning': 'true'
+      }
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch books');
@@ -33,7 +37,11 @@ function BookList() {
   };
 
   const fetchTotalBooksCount = () => {
-    fetch(`https://01a2-16-170-208-144.ngrok-free.app/books/count`)
+    fetch(`https://8b90-16-170-208-144.ngrok-free.app/books/count`,{
+      headers:{
+        'ngrok-skip-browser-warning': 'true'
+      }
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch total books count');
@@ -53,8 +61,11 @@ function BookList() {
   };
 
   const handleDeleteBook = (id) => {
-    fetch(`https://01a2-16-170-208-144.ngrok-free.app/books/${id}`, {
-      method: 'DELETE'
+    fetch(`https://8b90-16-170-208-144.ngrok-free.app/books/${id}`, {
+      method: 'DELETE',
+      headers:{
+        'ngrok-skip-browser-warning': 'true'
+      }
     })
     .then(response => {
       if (response.ok) {

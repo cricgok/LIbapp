@@ -12,7 +12,12 @@ function BorrowersList() {
 
   const fetchBorrowers = async () => {
     try {
-      const response = await fetch('https://01a2-16-170-208-144.ngrok-free.app/borrowers');
+      const response = await fetch('https://8b90-16-170-208-144.ngrok-free.app/borrowers/borrowers',{
+        headers: {
+          'ngrok-skip-browser-warning': 'true'
+
+        }
+      });
       if (!response.ok) {
         throw new Error('Failed to fetch borrowers data');
       }

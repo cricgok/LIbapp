@@ -45,7 +45,11 @@ function LibraryList() {
   }, [books, searchTitle, searchAuthor, searchSubject, sortBy]);
 
   const fetchBooks = () => {
-    fetch(`https://01a2-16-170-208-144.ngrok-free.app/books`)
+    fetch(`https://8b90-16-170-208-144.ngrok-free.app/books`,{
+    headers:{
+      'ngrok-skip-browser-warning': 'true'
+    }
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch books');
@@ -58,7 +62,11 @@ function LibraryList() {
       })
       .catch(error => console.error('Error fetching books:', error));
 
-    fetch(`https://01a2-16-170-208-144.ngrok-free.app/books/count`)
+    fetch(`https://8b90-16-170-208-144.ngrok-free.app/books/count`,{
+      headers:{
+        'ngrok-skip-browser-warning': 'true'
+      }
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch total books count');
@@ -90,10 +98,11 @@ function LibraryList() {
   };
 
   const handleBorrow = (bookId, borrowerData) => {
-    fetch(`https://edd7-16-170-208-144.ngrok-free.app/books/${bookId}/borrow`, {
+    fetch(`https://8b90-16-170-208-144.ngrok-free.app/books/${bookId}/borrow`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true'
       },
       body: JSON.stringify(borrowerData),
     })
