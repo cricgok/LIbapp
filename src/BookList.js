@@ -104,6 +104,7 @@ function BookList() {
               <td className="book-info">{book.subject}</td>
               <td className="book-info">{book.publish_date}</td>
               <td className="book-info">{book.count}</td>
+              console.log(book.id);
               <td><button className='book-delete' onClick={() => handleDeleteBook(book.id)}>Delete</button></td>
             </tr>
           ))}
