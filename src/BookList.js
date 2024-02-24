@@ -18,7 +18,7 @@ function BookList() {
   const fetchBooks = () => {
     const itemsPerPage = 10;
     const startIndex = (currentPage - 1) * itemsPerPage;
-    fetch(`https://4644-16-170-208-144.ngrok-free.app/books?_start=${startIndex}&_limit=${itemsPerPage}`,{
+    fetch(`https://4b69-16-170-208-144.ngrok-free.app/books?_start=${startIndex}&_limit=${itemsPerPage}`,{
       headers:{
         'ngrok-skip-browser-warning': 'true'
       }
@@ -37,7 +37,7 @@ function BookList() {
   };
 
   const fetchTotalBooksCount = () => {
-    fetch(`https://4644-16-170-208-144.ngrok-free.app/books/count`,{
+    fetch(`https://4b69-16-170-208-144.ngrok-free.app/books/count`,{
       headers:{
         'ngrok-skip-browser-warning': 'true'
       }
@@ -61,7 +61,7 @@ function BookList() {
   };
 
   const handleDeleteBook = (id) => {
-    fetch(`https://4644-16-170-208-144.ngrok-free.app/books/${id}`, {
+    fetch(`https://4b69-16-170-208-144.ngrok-free.app/books/${id}`, {
       method: 'DELETE',
       headers:{
         'ngrok-skip-browser-warning': 'true'
